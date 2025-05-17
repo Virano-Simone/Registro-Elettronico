@@ -1,0 +1,298 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 15px;
+}
+
+.logout-btn {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #bdc3c7;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--secondary-color);
+    padding: 10px 0;
+}
+
+.nav-tabs {
+    display: flex;
+    list-style: none;
+}
+
+.nav-tabs li {
+    margin-right: 5px;
+}
+
+.nav-tabs li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px 4px 0 0;
+    transition: background-color 0.3s;
+}
+
+.nav-tabs li a:hover,
+.nav-tabs li a.active {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Content Sections */
+.content-section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 20px;
+    color: var(--dark-color);
+}
+
+/* Table Styles */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-weight: bold;
+}
+
+.data-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Voti Section */
+.voti-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background-color: var(--light-color);
+    padding: 15px;
+    border-radius: 5px;
+    width: 32%;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.voto-sufficiente {
+    color: var(--success-color);
+}
+
+.voto-insufficiente {
+    color: var(--accent-color);
+}
+
+/* Assenze Section */
+.assenze-status {
+    margin-bottom: 20px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.giustificato {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.non-giustificato {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+/* Planning Section */
+.filter-controls {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.filter-control {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.materia-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    margin-right: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .header-content,
+    .nav-tabs,
+    .voti-stats {
+        flex-direction: column;
+    }
+    
+    .nav-tabs li {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .stat-card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .user-info {
+        margin-top: 10px;
+    }
+    
+    .data-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Tab content management */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Filters and controls */
+.controls {
+    margin-bottom: 20px;
+}
+
+select, input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* Loading indicator */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--dark-color);
+}
+
+.loading:after {
+    content: ".";
+    animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% {
+        content: ".";
+    }
+    40% {
+        content: "..";
+    }
+    60% {
+        content: "...";
+    }
+    80%, 100% {
+        content: "";
+    }
+}

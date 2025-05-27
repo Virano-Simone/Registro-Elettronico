@@ -1,5 +1,7 @@
 <?php
 $conn = null;
+//TIMEOUT deve essere una variabile espressa in secondi
+define("TIMEOUT", 30);
 function openConnection()
 {
     define("DB_NAME", "banche");
@@ -29,7 +31,8 @@ function openConnection()
         die("<b>Errore connessione db </b>" . $err->getMessage());
     }
 }
-function executeQuery($conn, $sql): mixed{
+function executeQuery($conn, $sql): mixed
+{
     try {
         //query metodo dell'oggetto conn che esegue la query. nelle chiamate get 
         // i dati sono restituiti sotto forma di recordset php
@@ -52,20 +55,40 @@ function executeQuery($conn, $sql): mixed{
     }
 }
 
-function checkParams($param): mixed{
+function checkParams($param): mixed
+{
     //per accedere a una variabile globale devo scrivere "global" seguito dal nome della variabile
     global $conn;
     //php consegna tutti i parametri dentro $_REQUEST
-    if(isset($_REQUEST[$param]))
-    //ritorna il valore del parametro(nel primo caso il contenuto del textBox)
+    if (isset($_REQUEST[$param]))
+        //ritorna il valore del parametro(nel primo caso il contenuto del textBox)
         return $_REQUEST[$param];
-    else
-    {
+    else {
         //errore di parametri mancanti
         http_response_code(400);
-        $conn->close();
+        if ($conn)
+            $conn->close();
         die("Parametro $param mancante");
     }
 
+}
+
+function checkSession()
+{
+    //accede alla sessione se c'è altrimenti ne crea una nuova
+    session_start();
+    //se la scadenza è impostata e se la sessione non è scaduta 
+    if (isset($_SESSION['scadenza']) && time() < $_SESSION['scadenza']) {
+        $_SESSION['scadenza'] = time() + TIMEOUT;
+        setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
+    } else {
+        //altrimenti o la sessione è scaduta oppure non esiste la distruggo
+        session_unset();
+        session_destroy();
+        //-1 indica che il cookie è già scaduto
+        setcookie(session_name(), '', -1, '/');
+        http_response_code(403);
+        die("Sessione scaduta");
+    }
 }
 ?>

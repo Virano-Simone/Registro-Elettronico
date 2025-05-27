@@ -8,23 +8,27 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-	<title>Registro Elettronico</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="./index.css">
-	<script src="./axios@1.1.2.min.js"></script>
-	<script src="./libreria.js"></script>
-	<script src="./index.js"></script>
+    <title>Registro Elettronico</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script src="librerie/axios@1.1.2.min.js"></script>
+    <script src="librerie/libreria.js"></script>
+    <script src="index.js"></script>
 </head>
+
 <body>
     <header>
         <div class="container header-content">
             <div class="logo">Registro Elettronico</div>
             <div class="user-info">
-                <span>Benvenuto, <strong><?php echo isset($_SESSION['nome']) ? $_SESSION['nome'] . ' ' . $_SESSION['cognome'] : 'Studente'; ?></strong></span>
-                <span>Classe: <strong><?php echo isset($_SESSION['classe']) ? $_SESSION['classe'] : ''; ?></strong></span>
-                <button class="logout-btn">Logout</button>
+                <span>Benvenuto,
+                    <strong><?php echo isset($_SESSION['nome']) ? $_SESSION['nome'] . ' ' . $_SESSION['cognome'] : 'Studente'; ?></strong></span>
+                <span>Classe:
+                    <strong><?php echo isset($_SESSION['classe']) ? $_SESSION['classe'] : ''; ?></strong></span>
+                <button class="logout-btn" id="btnLogout">Logout</button>
             </div>
         </div>
     </header>
@@ -46,7 +50,7 @@ session_start();
                 <div class="section-header">
                     <h2 class="section-title">I miei voti</h2>
                 </div>
-                
+
                 <div class="voti-stats">
                     <div class="stat-card">
                         <h3>Media generale</h3>
@@ -61,11 +65,11 @@ session_start();
                         <div class="stat-value"><?php /* qui il numero di voti insufficienti */ ?></div>
                     </div>
                 </div>
-                
+
                 <div class="controls">
                     <select id="filtro-materia">
                         <option value="">Tutte le materie</option>
-                        <?php 
+                        <?php
                         // Qui verrebbe generata la lista delle materie con PHP
                         // Esempio:
                         /*
@@ -82,7 +86,7 @@ session_start();
                         <option value="2">Secondo quadrimestre</option>
                     </select>
                 </div>
-                
+
                 <table class="data-table" id="tabella-voti">
                     <thead>
                         <tr>
@@ -110,7 +114,7 @@ session_start();
                 </table>
             </div>
         </div>
-        
+
         <!-- Sezione Assenze -->
         <div id="assenze" class="tab-content">
             <div class="content-section">
@@ -122,7 +126,7 @@ session_start();
                     <p>Totale assenze: <strong><?php /* qui il totale assenze */ ?></strong></p>
                     <p>Da giustificare: <strong><?php /* qui il numero di assenze da giustificare */ ?></strong></p>
                 </div>
-                
+
                 <table class="data-table" id="tabella-assenze">
                     <thead>
                         <tr>
@@ -150,18 +154,18 @@ session_start();
                 </table>
             </div>
         </div>
-        
+
         <!-- Sezione Planning -->
         <div id="planning" class="tab-content">
             <div class="content-section">
                 <div class="section-header">
                     <h2 class="section-title">Planning argomenti</h2>
                 </div>
-                
+
                 <div class="filter-controls">
                     <select id="filtro-planning-materia" class="filter-control">
                         <option value="">Tutte le materie</option>
-                        <?php 
+                        <?php
                         // Qui verrebbe generata la lista delle materie con PHP
                         // Esempio:
                         /*
@@ -173,7 +177,7 @@ session_start();
                     </select>
                     <input type="date" id="filtro-planning-data" class="filter-control">
                 </div>
-                
+
                 <table class="data-table" id="tabella-planning">
                     <thead>
                         <tr>
@@ -204,66 +208,66 @@ session_start();
 
     <script>
         // Script per gestire i tab di navigazione
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelectorAll('.nav-tabs a');
             const contents = document.querySelectorAll('.tab-content');
-            
+
             tabs.forEach(tab => {
-                tab.addEventListener('click', function(e) {
+                tab.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     // Rimuove la classe active da tutti i tab
                     tabs.forEach(t => t.classList.remove('active'));
-                    
+
                     // Aggiunge la classe active al tab cliccato
                     this.classList.add('active');
-                    
+
                     // Nasconde tutti i contenuti
                     contents.forEach(content => content.classList.remove('active'));
-                    
+
                     // Mostra il contenuto corrispondente
                     const targetId = this.getAttribute('href').substring(1);
                     document.getElementById(targetId).classList.add('active');
                 });
             });
-            
+
             // Gestione filtri
             const filtroMateria = document.getElementById('filtro-materia');
             if (filtroMateria) {
-                filtroMateria.addEventListener('change', function() {
+                filtroMateria.addEventListener('change', function () {
                     // Qui andrebbe il codice per filtrare i voti per materia
                     // O una chiamata AJAX al server per ricaricare i dati filtrati
                 });
             }
-            
+
             const filtroPeriodo = document.getElementById('filtro-periodo');
             if (filtroPeriodo) {
-                filtroPeriodo.addEventListener('change', function() {
+                filtroPeriodo.addEventListener('change', function () {
                     // Qui andrebbe il codice per filtrare i voti per periodo
                     // O una chiamata AJAX al server per ricaricare i dati filtrati
                 });
             }
-            
+
             const filtroPlanningMateria = document.getElementById('filtro-planning-materia');
             if (filtroPlanningMateria) {
-                filtroPlanningMateria.addEventListener('change', function() {
+                filtroPlanningMateria.addEventListener('change', function () {
                     // Qui andrebbe il codice per filtrare il planning per materia
                     // O una chiamata AJAX al server per ricaricare i dati filtrati
                 });
             }
-            
+
             const filtroPlanningData = document.getElementById('filtro-planning-data');
             if (filtroPlanningData) {
-                filtroPlanningData.addEventListener('change', function() {
+                filtroPlanningData.addEventListener('change', function () {
                     // Qui andrebbe il codice per filtrare il planning per data
                     // O una chiamata AJAX al server per ricaricare i dati filtrati
                 });
             }
-            
+
             // Gestione logout
             const logoutBtn = document.querySelector('.logout-btn');
             if (logoutBtn) {
-                logoutBtn.addEventListener('click', function() {
+                logoutBtn.addEventListener('click', function () {
                     // Redirect alla pagina di logout
                     window.location.href = "logout.php";
                 });
@@ -271,4 +275,5 @@ session_start();
         });
     </script>
 </body>
+
 </html>

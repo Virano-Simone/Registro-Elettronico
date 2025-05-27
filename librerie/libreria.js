@@ -37,6 +37,8 @@ function inviaRichiesta(method, url, parameters = {}) {
 function errore(err) {
 	if (!err.response)
 		alert("Connection Refused or Server timeout");
+	else if (err.response.status == 403)
+		window.location.href = "login.html";
 	else if (err.response.status == 200)
 		alert("Formato dei dati non corretto : " + err.response.data);
 	else

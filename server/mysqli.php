@@ -1,10 +1,10 @@
 <?php
 $conn = null;
 //TIMEOUT deve essere una variabile espressa in secondi
-define("TIMEOUT", 30);
+define("TIMEOUT", 1200);
 function openConnection()
 {
-    define("DB_NAME", "banche");
+    define("DB_NAME", "registroelettronico");
     //in caso in cui mysql sia su un'altra macchina dobbiamo immetere l'indirizzo IP della
     //macchina su cui è installato mysql
     define("DB_HOST", "localhost");

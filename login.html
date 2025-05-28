@@ -1,25 +1,71 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login</title>	
-	
-	<link rel="icon"       href="img/icoVallauri.png" type="image/png"/>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" >
+	<title>Login</title>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="login.css">
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	
-	<script src="librerie/axios@1.1.2.min.js"></script>			
-	<script src="librerie/libreria.js"></script>		
-	<script src="login.js"></script>	
+	<script src="librerie/axios@1.1.2.min.js"></script>
+	<script src="librerie/libreria.js"></script>
+	<script src="login.js"></script>
 </head>
 
 <body>
-	<h1>Benvenuto nella pagina di login</h1>	
+	<div class="login-card">
+		<div class="logo-section">
+			<div class="logo-icon">
+				<i class="fas fa-graduation-cap"></i>
+			</div>
+			<div class="school-title">IIS Vallauri</div>
+			<div class="school-subtitle">Fossano</div>
+		</div>
+
+		<form id="form1">
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-user"></i>
+					</span>
+					<input type="text" class="form-control" id="username" placeholder="Username">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-lock"></i>
+					</span>
+					<input type="password" class="form-control" id="password" placeholder="Password">
+				</div>
+			</div>
+
+			<div class="alert alert-danger alert-dismissible" id="lblErrore" style="display: none;">
+				<button type="button" class="close">&times;</button>
+				<strong>Attenzione!</strong> Username o Password non validi
+			</div>
+			<button type="button" class="btn btn-primary" id="btnLogin">
+				LOGIN
+			</button>
+		</form>
+
+		<div class="link-section">
+			<button type="button" class="btn btn-link" id="btnRegistrati">
+				Non hai un account? Registrati
+			</button>
+			<button type="button" class="btn btn-link" id="btnNewPassword">
+				Hai dimenticato la password?
+			</button>
+		</div>
+	</div>
+
 </body>
+
 </html>

@@ -1,11 +1,3 @@
-<?php
-// Simuliamo una sessione già avviata per lo studente
-session_start();
-
-// In un'implementazione reale, qui ci sarebbe il controllo della sessione
-// e il reindirizzamento al login se necessario
-?>
-
 <!DOCTYPE html>
 <html lang="it">
 
@@ -19,7 +11,7 @@ session_start();
     <script src="index.js"></script>
 </head>
 
-<body>
+<body style="display: none;">
     <header>
         <div class="container header-content">
             <div class="logo">Registro Elettronico</div>

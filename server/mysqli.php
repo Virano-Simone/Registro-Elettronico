@@ -1,7 +1,7 @@
 <?php
 $conn = null;
 //TIMEOUT deve essere una variabile espressa in secondi
-define("TIMEOUT", 1200);
+define("TIMEOUT", 120);//2 minuti
 function openConnection()
 {
     define("DB_NAME", "registroelettronico");

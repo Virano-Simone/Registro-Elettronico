@@ -30,6 +30,7 @@ if (count($data) == 0) {
         $_SESSION["matricola"] = $data[0]["matricola"];
         $_SESSION["nome"] = $data[0]["nome"];
         $_SESSION["cognome"] = $data[0]["cognome"];
+        $_SESSION["classe"] = $data[0]["classe"];
         setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
         http_response_code(200);
         //nel caso di errore non serve serializzare la risposta perchè il client parsifica solo nel caso di 

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="registrazione.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 	<script src="librerie/axios@1.1.2.min.js"></script>
 	<script src="librerie/libreria.js"></script>
 	<script src="registrazione.js"></script>
@@ -28,7 +29,7 @@
 
 		<div class="registration-title">Crea il tuo account</div>
 
-		<form id="registrationForm">
+		<form id="registrationForm" enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -49,124 +50,6 @@
 							<input type="text" class="form-control" name="txtCognome" placeholder="Cognome" required>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-text">
-						<i class="fas fa-map-marker-alt"></i>
-					</span>
-					<select class="form-control" id="lstComuni" required>
-						<option value="">Seleziona comune...</option>
-						<option value="1">Fossano</option>
-						<option value="2">Cuneo</option>
-						<option value="3">Alba</option>
-						<option value="4">Bra</option>
-						<option value="5">Savigliano</option>
-						<option value="6">Mondovì</option>
-						<option value="7">Saluzzo</option>
-						<option value="8">Cherasco</option>
-						<option value="9">Racconigi</option>
-						<option value="10">Sommariva del Bosco</option>
-						<option value="11">Cervere</option>
-						<option value="12">Marene</option>
-						<option value="13">Salmour</option>
-						<option value="14">Sant'Albano Stura</option>
-						<option value="15">Trinità</option>
-						<option value="16">Genola</option>
-						<option value="17">Villanova Solaro</option>
-						<option value="18">Centallo</option>
-						<option value="19">Tarantasca</option>
-						<option value="20">Busca</option>
-						<option value="21">Vottignasco</option>
-						<option value="22">Costigliole Saluzzo</option>
-						<option value="23">Verzuolo</option>
-						<option value="24">Piasco</option>
-						<option value="25">Venasca</option>
-						<option value="26">Rossana</option>
-						<option value="27">Manta</option>
-						<option value="28">Cavallermaggiore</option>
-						<option value="29">Murello</option>
-						<option value="30">Monasterolo di Savigliano</option>
-						<option value="31">Margarita</option>
-						<option value="32">Lagnasco</option>
-						<option value="33">Ruffia</option>
-						<option value="34">Scarnafigi</option>
-						<option value="35">Torre San Giorgio</option>
-						<option value="36">Moretta</option>
-						<option value="37">Cardè</option>
-						<option value="38">Envie</option>
-						<option value="39">Revello</option>
-						<option value="40">Gambasca</option>
-						<option value="41">Castellar</option>
-						<option value="42">Pagno</option>
-						<option value="43">Sanfront</option>
-						<option value="44">Rifreddo</option>
-						<option value="45">Barge</option>
-						<option value="46">Paesana</option>
-						<option value="47">Borgo San Dalmazzo</option>
-						<option value="48">Roccavione</option>
-						<option value="49">Bernezzo</option>
-						<option value="50">Caraglio</option>
-						<option value="51">Cervasca</option>
-						<option value="52">Vignolo</option>
-						<option value="53">Castelletto Stura</option>
-						<option value="54">Montanera</option>
-						<option value="55">Morozzo</option>
-						<option value="56">Beinette</option>
-						<option value="57">Peveragno</option>
-						<option value="58">Chiusa di Pesio</option>
-						<option value="59">Pianfei</option>
-						<option value="60">Vicoforte</option>
-						<option value="61">Monastero di Vasco</option>
-						<option value="62">Briaglia</option>
-						<option value="63">Magliano Alpi</option>
-						<option value="64">Rocca de' Baldi</option>
-						<option value="65">Bene Vagienna</option>
-						<option value="66">Carrù</option>
-						<option value="67">Piobesi d'Alba</option>
-						<option value="68">Corneliano d'Alba</option>
-						<option value="69">Canale</option>
-						<option value="70">Montà</option>
-						<option value="71">Guarene</option>
-						<option value="72">Barbaresco</option>
-						<option value="73">Neive</option>
-						<option value="74">Treiso</option>
-						<option value="75">Trezzo Tinella</option>
-						<option value="76">Castagnito</option>
-						<option value="77">Magliano Alfieri</option>
-						<option value="78">Priocca</option>
-						<option value="79">Santo Stefano Roero</option>
-						<option value="80">Pocapaglia</option>
-						<option value="81">Sommariva Perno</option>
-						<option value="82">Baldissero d'Alba</option>
-						<option value="83">Ceresole Alba</option>
-						<option value="84">Sanfrè</option>
-						<option value="85">Cavallerleone</option>
-						<option value="86">Limone Piemonte</option>
-						<option value="87">Vernante</option>
-						<option value="88">Robilante</option>
-						<option value="89">Valdieri</option>
-						<option value="90">Entracque</option>
-						<option value="91">Roaschia</option>
-						<option value="92">Demonte</option>
-						<option value="93">Gaiola</option>
-						<option value="94">Vinadio</option>
-						<option value="95">Aisone</option>
-						<option value="96">Sambuco</option>
-						<option value="97">Pietraporzio</option>
-						<option value="98">Stroppo</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-text">
-						<i class="fas fa-phone"></i>
-					</span>
-					<input type="tel" class="form-control" name="txtTelefono" placeholder="Telefono" required>
 				</div>
 			</div>
 
@@ -201,6 +84,177 @@
 								placeholder="Conferma Password" required>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-map-marker-alt"></i>
+					</span>
+					<select class="form-control" id="lstComuni" name="txtResidenza" required>
+						<option value="">Seleziona comune di residenza...</option>
+						<option value="Fossano">Fossano</option>
+						<option value="Cuneo">Cuneo</option>
+						<option value="Alba">Alba</option>
+						<option value="Bra">Bra</option>
+						<option value="Savigliano">Savigliano</option>
+						<option value="Mondovì">Mondovì</option>
+						<option value="Saluzzo">Saluzzo</option>
+						<option value="Cherasco">Cherasco</option>
+						<option value="Racconigi">Racconigi</option>
+						<option value="Sommariva del Bosco">Sommariva del Bosco</option>
+						<option value="Cervere">Cervere</option>
+						<option value="Marene">Marene</option>
+						<option value="Salmour">Salmour</option>
+						<option value="Sant'Albano Stura">Sant'Albano Stura</option>
+						<option value="Trinità">Trinità</option>
+						<option value="Genola">Genola</option>
+						<option value="Villanova Solaro">Villanova Solaro</option>
+						<option value="Centallo">Centallo</option>
+						<option value="Tarantasca">Tarantasca</option>
+						<option value="Busca">Busca</option>
+						<option value="Vottignasco">Vottignasco</option>
+						<option value="Costigliole Saluzzo">Costigliole Saluzzo</option>
+						<option value="Verzuolo">Verzuolo</option>
+						<option value="Piasco">Piasco</option>
+						<option value="Venasca">Venasca</option>
+						<option value="Rossana">Rossana</option>
+						<option value="Manta">Manta</option>
+						<option value="Cavallermaggiore">Cavallermaggiore</option>
+						<option value="Murello">Murello</option>
+						<option value="Monasterolo di Savigliano">Monasterolo di Savigliano</option>
+						<option value="Margarita">Margarita</option>
+						<option value="Lagnasco">Lagnasco</option>
+						<option value="Ruffia">Ruffia</option>
+						<option value="Scarnafigi">Scarnafigi</option>
+						<option value="Torre San Giorgio">Torre San Giorgio</option>
+						<option value="Moretta">Moretta</option>
+						<option value="Cardè">Cardè</option>
+						<option value="Envie">Envie</option>
+						<option value="Revello">Revello</option>
+						<option value="Gambasca">Gambasca</option>
+						<option value="Castellar">Castellar</option>
+						<option value="Pagno">Pagno</option>
+						<option value="Sanfront">Sanfront</option>
+						<option value="Rifreddo">Rifreddo</option>
+						<option value="Barge">Barge</option>
+						<option value="Paesana">Paesana</option>
+						<option value="Borgo San Dalmazzo">Borgo San Dalmazzo</option>
+						<option value="Roccavione">Roccavione</option>
+						<option value="Bernezzo">Bernezzo</option>
+						<option value="Caraglio">Caraglio</option>
+						<option value="Cervasca">Cervasca</option>
+						<option value="Vignolo">Vignolo</option>
+						<option value="Castelletto Stura">Castelletto Stura</option>
+						<option value="Montanera">Montanera</option>
+						<option value="Morozzo">Morozzo</option>
+						<option value="Beinette">Beinette</option>
+						<option value="Peveragno">Peveragno</option>
+						<option value="Chiusa di Pesio">Chiusa di Pesio</option>
+						<option value="Pianfei">Pianfei</option>
+						<option value="Vicoforte">Vicoforte</option>
+						<option value="Monastero di Vasco">Monastero di Vasco</option>
+						<option value="Briaglia">Briaglia</option>
+						<option value="Magliano Alpi">Magliano Alpi</option>
+						<option value="Rocca de' Baldi">Rocca de' Baldi</option>
+						<option value="Bene Vagienna">Bene Vagienna</option>
+						<option value="Carrù">Carrù</option>
+						<option value="Piobesi d'Alba">Piobesi d'Alba</option>
+						<option value="Corneliano d'Alba">Corneliano d'Alba</option>
+						<option value="Canale">Canale</option>
+						<option value="Montà">Montà</option>
+						<option value="Guarene">Guarene</option>
+						<option value="Barbaresco">Barbaresco</option>
+						<option value="Neive">Neive</option>
+						<option value="Treiso">Treiso</option>
+						<option value="Trezzo Tinella">Trezzo Tinella</option>
+						<option value="Castagnito">Castagnito</option>
+						<option value="Magliano Alfieri">Magliano Alfieri</option>
+						<option value="Priocca">Priocca</option>
+						<option value="Santo Stefano Roero">Santo Stefano Roero</option>
+						<option value="Pocapaglia">Pocapaglia</option>
+						<option value="Sommariva Perno">Sommariva Perno</option>
+						<option value="Baldissero d'Alba">Baldissero d'Alba</option>
+						<option value="Ceresole Alba">Ceresole Alba</option>
+						<option value="Sanfrè">Sanfrè</option>
+						<option value="Cavallerleone">Cavallerleone</option>
+						<option value="Limone Piemonte">Limone Piemonte</option>
+						<option value="Vernante">Vernante</option>
+						<option value="Robilante">Robilante</option>
+						<option value="Valdieri">Valdieri</option>
+						<option value="Entracque">Entracque</option>
+						<option value="Roaschia">Roaschia</option>
+						<option value="Demonte">Demonte</option>
+						<option value="Gaiola">Gaiola</option>
+						<option value="Vinadio">Vinadio</option>
+						<option value="Aisone">Aisone</option>
+						<option value="Sambuco">Sambuco</option>
+						<option value="Pietraporzio">Pietraporzio</option>
+						<option value="Stroppo">Stroppo</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-home"></i>
+					</span>
+					<input type="text" class="form-control" name="txtIndirizzo" placeholder="Indirizzo completo"
+						required>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-graduation-cap"></i>
+					</span>
+					<select class="form-control" id="lstTipoUtente" name="txtTipoUtente" required>
+						<option value="">Seleziona tipo utente...</option>
+						<option value="0">Studente</option>
+						<option value="1">Docente</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group" id="classeGroup" style="display: none;">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-school"></i>
+					</span>
+					<select class="form-control" id="lstClasse" name="txtClasse">
+						<option value="">Seleziona classe...</option>
+						<option value="1A INF">1A INF</option>
+						<option value="1B INF">1B INF</option>
+						<option value="1C INF">1C INF</option>
+						<option value="2A INF">2A INF</option>
+						<option value="2B INF">2B INF</option>
+						<option value="2C INF">2C INF</option>
+						<option value="3A INF">3A INF</option>
+						<option value="3B INF">3B INF</option>
+						<option value="3C INF">3C INF</option>
+						<option value="4A INF">4A INF</option>
+						<option value="4B INF">4B INF</option>
+						<option value="4C INF">4C INF</option>
+						<option value="5A INF">5A INF</option>
+						<option value="5B INF">5B INF</option>
+						<option value="5C INF">5C INF</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="image-upload-section">
+					<label class="image-upload-label">
+						<span class="input-group-text">
+							<i class="fas fa-camera"></i>
+						</span>
+						<span class="upload-text">Carica immagine profilo (opzionale)</span>
+						<input type="file" class="form-control-file" name="txtImmagine" accept="image/*"
+							id="imageInput">
+					</label>
 				</div>
 			</div>
 

@@ -14,7 +14,7 @@ function inviaRichiesta(method, url, parameters = {}) {
 		"headers": {
 			"Accept": "application/json",
 		},
-		"timeout": 5000,
+		"timeout": 10000,
 		"responseType": "json",
 	}
 	if (parameters instanceof FormData) {
@@ -35,6 +35,8 @@ function inviaRichiesta(method, url, parameters = {}) {
 
 
 function errore(err) {
+	console.error("Errore completo:", err);
+
 	if (!err.response)
 		alert("Connection Refused or Server timeout");
 	else if (err.response.status == 403)

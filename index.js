@@ -1,6 +1,4 @@
 window.onload = function () {
-
-
     let request = inviaRichiesta("GET", "server/controllaSessione.php");
     request.then(function (responseHTTP) {
         document.querySelector("body").style.display = "block";
@@ -20,12 +18,16 @@ window.onload = function () {
 
 let votiData = [];
 let materieData = [];
+let assenzeData = [];
+let planningData = [];
 
 function inizializzaApp() {
     inizializzaNavigazione();
 
     caricaVoti();
     caricaMaterie();
+    caricaAssenze();
+    caricaPlanning();
 }
 
 function inizializzaNavigazione() {
@@ -57,21 +59,13 @@ function caricaVoti() {
     }).catch(errore);
 }
 
-function caricaMaterie() {
-    let request = inviaRichiesta("GET", "server/getMaterie.php");
-    request.then(function (response) {
-        materieData = response.data;
-        popolaSelectMaterie();
-    }).catch(errore);
-}
-
 function aggiornaStatistiche(voti) {
     const totalVoti = voti.length;
 
     if (totalVoti == 0) {
-        document.getElementById('mediaGenerale').textContent = '--';
-        document.getElementById('votiSufficienti').textContent = '0';
-        document.getElementById('votiInsufficenti').textContent = '0';
+        document.querySelector('#mediaGenerale').textContent = '--';
+        document.querySelector('#votiSufficienti').textContent = '0';
+        document.querySelector('#votiInsufficienti').textContent = '0';
         return;
     }
 
@@ -89,7 +83,7 @@ function aggiornaStatistiche(voti) {
 function aggiornaTabellaVoti(voti) {
     const tbody = document.querySelector('#tabella-voti tbody');
 
-    if (voti.length === 0) {
+    if (voti.length == 0) {
         tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">Nessun voto disponibile</td></tr>';
         return;
     }
@@ -112,9 +106,156 @@ function aggiornaTabellaVoti(voti) {
     tbody.innerHTML = html;
 }
 
+function inizializzaFiltriVoti() {
+    const filtroMateria = document.getElementById('filtro-materia');
+    const filtroPeriodo = document.getElementById('filtro-periodo');
+
+    filtroMateria.addEventListener('change', applicaFiltriVoti);
+    filtroPeriodo.addEventListener('change', applicaFiltriVoti);
+}
+
+function applicaFiltriVoti() {
+    const materiaSelezionata = document.getElementById('filtro-materia').value;
+    const periodoSelezionato = document.getElementById('filtro-periodo').value;
+
+    let votiFiltrati = votiData.slice();
+
+    if (materiaSelezionata) {
+        votiFiltrati = votiFiltrati.filter(voto => voto.materia_id == materiaSelezionata);
+    }
+
+    if (periodoSelezionato) {
+        const anno = new Date().getFullYear();
+        votiFiltrati = votiFiltrati.filter(voto => {
+            const dataVoto = new Date(voto.data);
+            if (periodoSelezionato == '1') {
+                return (dataVoto.getMonth() >= 8) || (dataVoto.getMonth() == 0 && dataVoto.getDate() <= 31);
+            } else if (periodoSelezionato == '2') {
+                return dataVoto.getMonth() >= 1 && dataVoto.getMonth() <= 5;
+            }
+        });
+    }
+
+    aggiornaStatistiche(votiFiltrati);
+    aggiornaTabellaVoti(votiFiltrati);
+}
+
+function caricaAssenze() {
+    let request = inviaRichiesta("GET", "server/getAssenze.php");
+    request.then(function (response) {
+        assenzeData = response.data;
+        aggiornaStatisticheAssenze(assenzeData);
+        aggiornaTabellaAssenze(assenzeData);
+    }).catch(errore);
+}
+
+function aggiornaStatisticheAssenze(assenze) {
+    const totaleAssenze = assenze.length;
+    const daGiustificare = assenze.filter(assenza => assenza.giustificato == 0).length;
+
+    document.querySelector('#totaleAssenze').textContent = totaleAssenze;
+    document.querySelector('#daGiustificare').textContent = daGiustificare;
+}
+
+function aggiornaTabellaAssenze(assenze) {
+    const tbody = document.querySelector('#tabella-assenze tbody');
+
+    if (assenze.length == 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 20px;">Nessuna assenza registrata</td></tr>';
+        return;
+    }
+
+    let html = '';
+    assenze.forEach(assenza => {
+        const dataFormattata = formatDate(assenza.data);
+        const statoClass = assenza.giustificato == 1 ? 'giustificata' : 'non-giustificata';
+        const statoTesto = assenza.giustificato == 1 ? 'Giustificata' : 'Da giustificare';
+        const tipoIcon = assenza.giustificato == 1 ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+
+        html += `
+            <tr>
+                <td>${dataFormattata}</td>
+                <td>Assenza</td>
+                <td>
+                    <span class="stato-assenza ${statoClass}">
+                        <i class="${tipoIcon}"></i>
+                        ${statoTesto}
+                    </span>
+                </td>
+            </tr>
+        `;
+    });
+
+    tbody.innerHTML = html;
+}
+
+function caricaPlanning() {
+    let request = inviaRichiesta("GET", "server/getPlanning.php");
+    request.then(function (response) {
+        planningData = response.data;
+        aggiornaTabellaPlanning(planningData);
+        inizializzaFiltriPlanning();
+    }).catch(errore);
+}
+
+function aggiornaTabellaPlanning(planning) {
+    const tbody = document.querySelector('#tabella-planning tbody');
+
+    if (planning.length == 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 20px;">Nessun argomento programmato</td></tr>';
+        return;
+    }
+
+    let html = '';
+    planning.forEach(item => {
+        const dataFormattata = formatDate(item.data);
+
+        html += `
+            <tr>
+                <td>${dataFormattata}</td>
+                <td>${item.materia_nome}</td>
+                <td>${item.argomento}</td>
+            </tr>
+        `;
+    });
+
+    tbody.innerHTML = html;
+}
+
+function inizializzaFiltriPlanning() {
+    const filtroMateria = document.querySelector('#filtro-planning-materia');
+    const filtroData = document.querySelector('#filtro-planning-data');
+
+    filtroMateria.addEventListener('change', applicaFiltriPlanning);
+    filtroData.addEventListener('change', applicaFiltriPlanning);
+}
+
+function applicaFiltriPlanning() {
+    const materiaSelezionata = document.querySelector('#filtro-planning-materia').value;
+    const dataSelezionata = document.querySelector('#filtro-planning-data').value;
+
+    let planningFiltrato = planningData.slice();//crea una copia dell'array originale
+    planningFiltrato = planningFiltrato.filter(item => item.materia_id == materiaSelezionata);
+
+    planningFiltrato = planningFiltrato.filter(item => {
+        const dataItem = new Date(item.data).toISOString().split('T')[0];
+        return dataItem == dataSelezionata;
+    });
+
+    aggiornaTabellaPlanning(planningFiltrato);
+}
+
+function caricaMaterie() {
+    let request = inviaRichiesta("GET", "server/getMaterie.php");
+    request.then(function (response) {
+        materieData = response.data;
+        popolaSelectMaterie();
+    }).catch(errore);
+}
+
 function popolaSelectMaterie() {
-    const selectMateria = document.getElementById('filtro-materia');
-    const selectPlanningMateria = document.getElementById('filtro-planning-materia');
+    const selectMateria = document.querySelector('#filtro-materia');
+    const selectPlanningMateria = document.querySelector('#filtro-planning-materia');
 
     selectMateria.innerHTML = '<option value="">Tutte le materie</option>';
     if (selectPlanningMateria) {
@@ -128,40 +269,6 @@ function popolaSelectMaterie() {
             selectPlanningMateria.innerHTML += option;
         }
     });
-}
-
-function inizializzaFiltriVoti() {
-    const filtroMateria = document.getElementById('filtro-materia');
-    const filtroPeriodo = document.getElementById('filtro-periodo');
-
-    filtroMateria.addEventListener('change', applicaFiltriVoti);
-    filtroPeriodo.addEventListener('change', applicaFiltriVoti);
-}
-
-function applicaFiltriVoti() {
-    const materiaSelezionata = document.getElementById('filtro-materia').value;
-    const periodoSelezionato = document.getElementById('filtro-periodo').value;
-
-    let votiFiltrati = [...votiData];
-
-    if (materiaSelezionata) {
-        votiFiltrati = votiFiltrati.filter(voto => voto.materia_id == materiaSelezionata);
-    }
-
-    if (periodoSelezionato) {
-        const anno = new Date().getFullYear();
-        votiFiltrati = votiFiltrati.filter(voto => {
-            const dataVoto = new Date(voto.data);
-            if (periodoSelezionato === '1') {
-                return (dataVoto.getMonth() >= 8) || (dataVoto.getMonth() === 0 && dataVoto.getDate() <= 31);
-            } else if (periodoSelezionato === '2') {
-                return dataVoto.getMonth() >= 1 && dataVoto.getMonth() <= 5;
-            }
-        });
-    }
-
-    aggiornaStatistiche(votiFiltrati);
-    aggiornaTabellaVoti(votiFiltrati);
 }
 
 function formatDate(dateString) {

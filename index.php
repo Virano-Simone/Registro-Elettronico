@@ -106,7 +106,7 @@
                                     <i class="fas fa-exclamation-triangle"></i>
                                 </div>
                             </div>
-                            <div class="stat-value" id="votiInsufficenti">--</div>
+                            <div class="stat-value" id="votiInsufficienti">--</div>
                             <div class="stat-subtitle">Voti < 6</div>
                             </div>
                         </div>

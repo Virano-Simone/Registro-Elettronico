@@ -184,7 +184,6 @@ select.form-control:disabled {
     cursor: not-allowed !important;
 }
 
-/* STILI PER L'UPLOAD DELL'IMMAGINE */
 .image-upload-section {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -228,45 +227,6 @@ select.form-control:disabled {
 
 .form-control-file {
     display: none;
-}
-
-.image-preview {
-    margin-top: 15px;
-    position: relative;
-    display: inline-block;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.image-preview img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.btn-remove-image {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(244, 67, 54, 0.9);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s ease;
-}
-
-.btn-remove-image:hover {
-    background: rgba(244, 67, 54, 1);
-    transform: scale(1.1);
 }
 
 .btn-register {
@@ -348,11 +308,6 @@ select.form-control:disabled {
     }
 }
 
-/* Hack per forzare la visibilità del testo nel select */
-.input-group:has(select) {
-    position: relative;
-}
-
 .input-group:has(select)::after {
     content: "";
     position: absolute;
@@ -363,10 +318,4 @@ select.form-control:disabled {
     background: transparent;
     pointer-events: none;
     z-index: 5;
-}
-
-/* Rimuovi qualsiasi stile che potrebbe interferire con Bootstrap */
-.bootstrap-select .dropdown-toggle .filter-option {
-    color: black !important;
-    background: white !important;
 }

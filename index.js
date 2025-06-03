@@ -31,14 +31,31 @@ function inizializzaApp() {
 }
 
 function inizializzaNavigazione() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    document.querySelectorAll('.nav-link-mobile').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = this.getAttribute('href');
+
+            const tabElement = document.querySelector(`button[data-bs-target="${target}"]`);
+            if (tabElement) {
+                const tab = new bootstrap.Tab(tabElement);
+                tab.show();
+            }
+
+            const dropdown = bootstrap.Dropdown.getInstance(this.closest('.dropdown').querySelector('[data-bs-toggle="dropdown"]'));
+            if (dropdown) {
+                dropdown.hide();
+            }
+        });
+    });
+
     const tabContents = document.querySelectorAll('.tab-content');
 
-    navLinks.forEach(link => {
+    document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
 
-            navLinks.forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             tabContents.forEach(t => t.classList.remove('active'));
 
             this.classList.add('active');

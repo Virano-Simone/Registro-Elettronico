@@ -109,27 +109,23 @@ body {
     color: #333 !important;
 }
 
-/* SOLUZIONE PER IL POSIZIONAMENTO DEL TESTO NEL SELECT */
+
 select.form-control {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 
-    /* Colori e sfondo */
     background-color: white !important;
     color: #333 !important;
 
-    /* CORREZIONE POSIZIONAMENTO VERTICALE */
     line-height: 1.2 !important;
     padding: 12px 45px 12px 20px !important;
     height: auto !important;
     min-height: 50px !important;
 
-    /* Allineamento verticale del testo */
     display: flex !important;
     align-items: center !important;
 
-    /* Freccia personalizzata */
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
     background-repeat: no-repeat !important;
     background-position: right 15px center !important;
@@ -137,13 +133,11 @@ select.form-control {
 
     cursor: pointer !important;
 
-    /* Rimuovi bordi e ombre */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
 
-/* Stile specifico per tutti i select */
 #lstComuni,
 #lstTipoUtente,
 #lstClasse {
@@ -160,7 +154,6 @@ select.form-control {
     opacity: 1 !important;
 }
 
-/* Stile per le opzioni del select */
 select.form-control option {
     background-color: white !important;
     color: #333 !important;
@@ -168,7 +161,6 @@ select.form-control option {
     line-height: normal !important;
 }
 
-/* Stile per il select quando è in focus */
 select.form-control:focus {
     background-color: white !important;
     color: #333 !important;
@@ -177,7 +169,6 @@ select.form-control:focus {
     box-shadow: none !important;
 }
 
-/* Stile per il select quando è disabilitato */
 select.form-control:disabled {
     background-color: #f5f5f5 !important;
     color: #999 !important;

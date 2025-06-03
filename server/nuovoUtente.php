@@ -4,7 +4,6 @@ require("mysqli.php");
 
 $conn = openConnection();
 
-// Recupero parametri dal form
 $nome = checkParams("Nome");
 $cognome = checkParams("Cognome");
 $mail = checkParams("Mail");

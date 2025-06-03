@@ -49,12 +49,10 @@ window.onload = function () {
     })
 
     btnRegistrati.addEventListener("click", function () {
-        alert("Redirect a pagina registrazione");
-        // location.href = "_registrazione.php"
+        location.href = "registrazione.html"
     })
 
     btnNewPassword.addEventListener("click", function () {
-        alert("Redirect a pagina password dimenticata");
-        // location.href = "_passwordDimenticata.html"
+        location.href = "_passwordDimenticata.html";
     })
 }

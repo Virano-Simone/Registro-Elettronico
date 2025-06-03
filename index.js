@@ -222,8 +222,8 @@ function aggiornaTabellaPlanning(planning) {
 }
 
 function inizializzaFiltriPlanning() {
-    const filtroMateria = document.getElementById('filtro-planning-materia');
-    const filtroData = document.getElementById('filtro-planning-data');
+    const filtroMateria = document.querySelector('#filtro-planning-materia');
+    const filtroData = document.querySelector('#filtro-planning-data');
 
     if (filtroMateria) {
         filtroMateria.addEventListener('change', applicaFiltriPlanning);
@@ -234,8 +234,8 @@ function inizializzaFiltriPlanning() {
 }
 
 function applicaFiltriPlanning() {
-    const materiaSelezionata = document.getElementById('filtro-planning-materia').value;
-    const dataSelezionata = document.getElementById('filtro-planning-data').value;
+    const materiaSelezionata = document.querySelector('#filtro-planning-materia').value;
+    const dataSelezionata = document.querySelector('#filtro-planning-data').value;
 
     let planningFiltrato = planningData.slice();
 

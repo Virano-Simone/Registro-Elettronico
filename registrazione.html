@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registrazione - IIS Vallauri</title>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="registrazione.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="librerie/axios@1.1.2.min.js"></script>
+	<script src="librerie/libreria.js"></script>
+	<script src="registrazione.js"></script>
+</head>
+
+<body>
+	<div class="registration-card">
+		<div class="logo-section">
+			<div class="logo-icon">
+				<i class="fas fa-graduation-cap"></i>
+			</div>
+			<div class="school-title">IIS Vallauri</div>
+			<div class="school-subtitle">Fossano</div>
+		</div>
+
+		<div class="registration-title">Crea il tuo account</div>
+
+		<form id="registrationForm">
+			<div class="form-row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="fas fa-user"></i>
+							</span>
+							<input type="text" class="form-control" name="txtNome" placeholder="Nome" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="fas fa-user"></i>
+							</span>
+							<input type="text" class="form-control" name="txtCognome" placeholder="Cognome" required>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-map-marker-alt"></i>
+					</span>
+					<select class="form-control" id="lstComuni" required>
+						<option value="">Seleziona comune...</option>
+						<option value="1">Fossano</option>
+						<option value="2">Cuneo</option>
+						<option value="3">Alba</option>
+						<option value="4">Bra</option>
+						<option value="5">Savigliano</option>
+						<option value="6">Mondovì</option>
+						<option value="7">Saluzzo</option>
+						<option value="8">Cherasco</option>
+						<option value="9">Racconigi</option>
+						<option value="10">Sommariva del Bosco</option>
+						<option value="11">Cervere</option>
+						<option value="12">Marene</option>
+						<option value="13">Salmour</option>
+						<option value="14">Sant'Albano Stura</option>
+						<option value="15">Trinità</option>
+						<option value="16">Genola</option>
+						<option value="17">Villanova Solaro</option>
+						<option value="18">Centallo</option>
+						<option value="19">Tarantasca</option>
+						<option value="20">Busca</option>
+						<option value="21">Vottignasco</option>
+						<option value="22">Costigliole Saluzzo</option>
+						<option value="23">Verzuolo</option>
+						<option value="24">Piasco</option>
+						<option value="25">Venasca</option>
+						<option value="26">Rossana</option>
+						<option value="27">Manta</option>
+						<option value="28">Cavallermaggiore</option>
+						<option value="29">Murello</option>
+						<option value="30">Monasterolo di Savigliano</option>
+						<option value="31">Margarita</option>
+						<option value="32">Lagnasco</option>
+						<option value="33">Ruffia</option>
+						<option value="34">Scarnafigi</option>
+						<option value="35">Torre San Giorgio</option>
+						<option value="36">Moretta</option>
+						<option value="37">Cardè</option>
+						<option value="38">Envie</option>
+						<option value="39">Revello</option>
+						<option value="40">Gambasca</option>
+						<option value="41">Castellar</option>
+						<option value="42">Pagno</option>
+						<option value="43">Sanfront</option>
+						<option value="44">Rifreddo</option>
+						<option value="45">Barge</option>
+						<option value="46">Paesana</option>
+						<option value="47">Borgo San Dalmazzo</option>
+						<option value="48">Roccavione</option>
+						<option value="49">Bernezzo</option>
+						<option value="50">Caraglio</option>
+						<option value="51">Cervasca</option>
+						<option value="52">Vignolo</option>
+						<option value="53">Castelletto Stura</option>
+						<option value="54">Montanera</option>
+						<option value="55">Morozzo</option>
+						<option value="56">Beinette</option>
+						<option value="57">Peveragno</option>
+						<option value="58">Chiusa di Pesio</option>
+						<option value="59">Pianfei</option>
+						<option value="60">Vicoforte</option>
+						<option value="61">Monastero di Vasco</option>
+						<option value="62">Briaglia</option>
+						<option value="63">Magliano Alpi</option>
+						<option value="64">Rocca de' Baldi</option>
+						<option value="65">Bene Vagienna</option>
+						<option value="66">Carrù</option>
+						<option value="67">Piobesi d'Alba</option>
+						<option value="68">Corneliano d'Alba</option>
+						<option value="69">Canale</option>
+						<option value="70">Montà</option>
+						<option value="71">Guarene</option>
+						<option value="72">Barbaresco</option>
+						<option value="73">Neive</option>
+						<option value="74">Treiso</option>
+						<option value="75">Trezzo Tinella</option>
+						<option value="76">Castagnito</option>
+						<option value="77">Magliano Alfieri</option>
+						<option value="78">Priocca</option>
+						<option value="79">Santo Stefano Roero</option>
+						<option value="80">Pocapaglia</option>
+						<option value="81">Sommariva Perno</option>
+						<option value="82">Baldissero d'Alba</option>
+						<option value="83">Ceresole Alba</option>
+						<option value="84">Sanfrè</option>
+						<option value="85">Cavallerleone</option>
+						<option value="86">Limone Piemonte</option>
+						<option value="87">Vernante</option>
+						<option value="88">Robilante</option>
+						<option value="89">Valdieri</option>
+						<option value="90">Entracque</option>
+						<option value="91">Roaschia</option>
+						<option value="92">Demonte</option>
+						<option value="93">Gaiola</option>
+						<option value="94">Vinadio</option>
+						<option value="95">Aisone</option>
+						<option value="96">Sambuco</option>
+						<option value="97">Pietraporzio</option>
+						<option value="98">Stroppo</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-phone"></i>
+					</span>
+					<input type="tel" class="form-control" name="txtTelefono" placeholder="Telefono" required>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fas fa-envelope"></i>
+					</span>
+					<input type="email" class="form-control" name="txtMail" placeholder="Email" required>
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="fas fa-lock"></i>
+							</span>
+							<input type="password" class="form-control" name="txtPassword" placeholder="Password"
+								required>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-text">
+								<i class="fas fa-lock"></i>
+							</span>
+							<input type="password" class="form-control" name="txtConfPassword"
+								placeholder="Conferma Password" required>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="alert alert-danger alert-custom" id="alertError" style="display: none;">
+				<i class="fas fa-exclamation-triangle"></i>
+				<span id="errorMessage">Le password non coincidono</span>
+			</div>
+
+			<div class="alert alert-success alert-custom" id="alertSuccess" style="display: none;">
+				<i class="fas fa-check-circle"></i>
+				<span>Utente registrato correttamente!</span>
+			</div>
+
+			<button type="button" class="btn btn-register" id="btnInvia">
+				<i class="fas fa-user-plus"></i> REGISTRATI
+			</button>
+		</form>
+
+		<div class="link-section">
+			<button type="button" class="btn btn-link" id="btnLogin">
+				Hai già un account? Accedi
+			</button>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -14,7 +14,6 @@
 
 <body style="display: none;">
     <?php session_start(); ?>
-    <!-- Modern Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
@@ -22,13 +21,17 @@
                 <span>Registro Elettronico</span>
             </div>
             <div class="user-section">
+                <div class="user-avatar">
+                    <img id="userImage" src="./img/<?php echo ($_SESSION['immagine']) ?>" alt="Avatar utente"
+                        class="user-image">
+                </div>
                 <div class="user-info">
                     <div class="user-name" id="userName">
                         <?php
-                        echo isset($_SESSION['nome']) ? $_SESSION['nome'] . ' ' . $_SESSION['cognome'] : 'Studente'; ?>
+                        echo ($_SESSION['nome'] . ' ' . $_SESSION['cognome']) ?>
                     </div>
                     <div class="user-class" id="userClass">
-                        <?php echo isset($_SESSION['classe']) ? $_SESSION['classe'] : ''; ?>
+                        <?php echo ($_SESSION['classe']); ?>
                     </div>
                 </div>
                 <button class="logout-btn" id="btnLogout">
@@ -39,7 +42,6 @@
         </div>
     </header>
 
-    <!-- Modern Navigation -->
     <nav class="navigation">
         <div class="nav-container">
             <ul class="nav-tabs">
@@ -65,9 +67,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Sezione Voti -->
         <div id="voti" class="tab-content active">
             <div class="content-section">
                 <div class="section-header">
@@ -77,7 +77,6 @@
                     </h2>
                 </div>
                 <div class="section-content">
-                    <!-- Stats Cards -->
                     <div class="stats-grid">
                         <div class="stat-card media">
                             <div class="stat-header">
@@ -111,7 +110,6 @@
                             </div>
                         </div>
 
-                        <!-- Filtri -->
                         <div class="controls">
                             <div class="control-group">
                                 <label class="control-label">Materia</label>
@@ -129,7 +127,6 @@
                             </div>
                         </div>
 
-                        <!-- Tabella Voti -->
                         <div class="table-container">
                             <table class="data-table" id="tabella-voti">
                                 <thead>
@@ -156,7 +153,6 @@
                 </div>
             </div>
 
-            <!-- Sezione Assenze -->
             <div id="assenze" class="tab-content">
                 <div class="content-section">
                     <div class="section-header">
@@ -166,7 +162,6 @@
                         </h2>
                     </div>
                     <div class="section-content">
-                        <!-- Stats Assenze -->
                         <div class="stats-grid">
                             <div class="stat-card media">
                                 <div class="stat-header">
@@ -190,7 +185,6 @@
                             </div>
                         </div>
 
-                        <!-- Tabella Assenze -->
                         <div class="table-container">
                             <table class="data-table" id="tabella-assenze">
                                 <thead>
@@ -216,7 +210,6 @@
                 </div>
             </div>
 
-            <!-- Sezione Planning -->
             <div id="planning" class="tab-content">
                 <div class="content-section">
                     <div class="section-header">
@@ -226,7 +219,6 @@
                         </h2>
                     </div>
                     <div class="section-content">
-                        <!-- Filtri Planning -->
                         <div class="controls">
                             <div class="control-group">
                                 <label class="control-label">Materia</label>
@@ -240,7 +232,6 @@
                             </div>
                         </div>
 
-                        <!-- Tabella Planning -->
                         <div class="table-container">
                             <table class="data-table" id="tabella-planning">
                                 <thead>

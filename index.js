@@ -125,7 +125,6 @@ function applicaFiltriVoti() {
     }
 
     if (periodoSelezionato) {
-        const anno = new Date().getFullYear();
         votiFiltrati = votiFiltrati.filter(voto => {
             const dataVoto = new Date(voto.data);
             if (periodoSelezionato == '1') {
@@ -223,24 +222,33 @@ function aggiornaTabellaPlanning(planning) {
 }
 
 function inizializzaFiltriPlanning() {
-    const filtroMateria = document.querySelector('#filtro-planning-materia');
-    const filtroData = document.querySelector('#filtro-planning-data');
+    const filtroMateria = document.getElementById('filtro-planning-materia');
+    const filtroData = document.getElementById('filtro-planning-data');
 
-    filtroMateria.addEventListener('change', applicaFiltriPlanning);
-    filtroData.addEventListener('change', applicaFiltriPlanning);
+    if (filtroMateria) {
+        filtroMateria.addEventListener('change', applicaFiltriPlanning);
+    }
+    if (filtroData) {
+        filtroData.addEventListener('change', applicaFiltriPlanning);
+    }
 }
 
 function applicaFiltriPlanning() {
-    const materiaSelezionata = document.querySelector('#filtro-planning-materia').value;
-    const dataSelezionata = document.querySelector('#filtro-planning-data').value;
+    const materiaSelezionata = document.getElementById('filtro-planning-materia').value;
+    const dataSelezionata = document.getElementById('filtro-planning-data').value;
 
-    let planningFiltrato = planningData.slice();//crea una copia dell'array originale
-    planningFiltrato = planningFiltrato.filter(item => item.materia_id == materiaSelezionata);
+    let planningFiltrato = planningData.slice();
 
-    planningFiltrato = planningFiltrato.filter(item => {
-        const dataItem = new Date(item.data).toISOString().split('T')[0];
-        return dataItem == dataSelezionata;
-    });
+    if (materiaSelezionata) {
+        planningFiltrato = planningFiltrato.filter(item => item.materia_id == materiaSelezionata);
+    }
+
+    if (dataSelezionata) {
+        planningFiltrato = planningFiltrato.filter(item => {
+            const dataItem = new Date(item.data).toISOString().split('T')[0];
+            return dataItem === dataSelezionata;
+        });
+    }
 
     aggiornaTabellaPlanning(planningFiltrato);
 }
